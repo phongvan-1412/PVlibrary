@@ -48,7 +48,7 @@ namespace pvlibrary.Model.Business
             try
             {
                 var searchArray = (from bs in entities.BillStatus
-                                   where bs.bs_name.Contains(searchText)
+                                   where bs.bs_name.Contains(searchText) || bs.bs_name.ToLower().Contains(searchText)
                                    select bs).ToList();
 
                 BillContent.dataGridBs.Items.Clear();

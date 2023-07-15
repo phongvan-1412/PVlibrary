@@ -47,7 +47,7 @@ namespace pvlibrary.Model.Business
         {
             try
             {
-                var searchArray = entities.Categories.Where(c => c.cate_name.ToLower().Contains(searchText)).ToList();
+                var searchArray = entities.Categories.Where(c => c.cate_name.ToLower().Contains(searchText) || c.cate_name.Contains(searchText)).ToList();
 
                 CategoryContent.dataGrid.Items.Clear();
                 foreach (var item in searchArray)

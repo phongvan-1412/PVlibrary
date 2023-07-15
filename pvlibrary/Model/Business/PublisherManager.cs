@@ -49,6 +49,7 @@ namespace pvlibrary.Model.Business
             {
                 var searchArray = entities.Publishers.Where(pub =>
                                    pub.pub_name.Contains(searchText)
+                                || pub.pub_name.ToLower().Contains(searchText)
                                 || pub.pub_information.Contains(searchText)).ToList();
 
                 PublisherContent.dataGrid.Items.Clear();

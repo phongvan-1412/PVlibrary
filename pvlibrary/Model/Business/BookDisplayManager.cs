@@ -27,8 +27,11 @@ namespace pvlibrary.Model.Business
                                     || b.BookSalePrice.ToString().Contains(searchText)
                                     || b.BookDescription.ToLower().Contains(searchText)
                                     || b.AuthName.ToLower().Contains(searchText)
+                                    || b.AuthName.Contains(searchText)
+                                    || b.CateName.Contains(searchText)
                                     || b.CateName.ToLower().Contains(searchText)
-                                    || b.PubName.ToLower().Contains(searchText)).ToList();
+                                    || b.PubName.ToLower().Contains(searchText)
+                                    || b.PubName.Contains(searchText)).ToList();
 
                 BookContent.datagrid.Items.Clear();
                 foreach (var item in searchArray)

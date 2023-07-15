@@ -49,6 +49,7 @@ namespace pvlibrary.Model.Business
             {
                 var searchArray = entities.Customers.Where(cus =>
                                    cus.cus_name.ToLower().Contains(searchText)
+                                || cus.cus_name.Contains(searchText)
                                 || cus.cus_contact.ToString().Contains(searchText)
                                 || cus.cus_address.ToLower().Contains(searchText)
                                 || cus.cus_email.ToLower().Contains(searchText)).ToList();

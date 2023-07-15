@@ -23,7 +23,8 @@ namespace pvlibrary.Model.Business
         {
             try
             {
-                var searchArray = BillDetailContent.bidDisplayArray.Where(bid => bid.BookName.Contains(searchText)
+                var searchArray = BillDetailContent.bidDisplayArray.Where(bid => bid.BookName.ToLower().Contains(searchText)
+                                                    || bid.BookName.Contains(searchText)
                                                     || bid.BidAmount.ToString().Contains(searchText)
                                                     || bid.BidPayment.ToString().Contains(searchText));
 

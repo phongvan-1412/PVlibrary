@@ -51,7 +51,8 @@ namespace pvlibrary.Model.Business
         {
             try
             {
-                var searchArray = entities.Authors.Where(a => a.auth_name.Contains(searchText)
+                var searchArray = entities.Authors.Where(a => a.auth_name.ToLower().Contains(searchText)
+                                                       || a.auth_name.Contains(searchText)
                                                        || a.auth_information.Contains(searchText)).ToList();
                 AuthorContent.datagrid.Items.Clear();
                 foreach (var item in searchArray)

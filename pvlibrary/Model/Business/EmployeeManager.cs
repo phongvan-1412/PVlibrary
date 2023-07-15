@@ -49,6 +49,7 @@ namespace pvlibrary.Model.Business
             {
                 var searchArray = entities.Employees.Where(emp =>  
                                   emp.emp_name.Contains(searchText)
+                               || emp.emp_name.ToLower().Contains(searchText)
                                || emp.emp_email.Contains(searchText)
                                || emp.emp_password.Contains(searchText)).ToList();
 

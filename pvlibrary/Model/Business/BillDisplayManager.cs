@@ -26,7 +26,9 @@ namespace pvlibrary.Model.Business
                                         || b.BillTotal.ToString().Contains(searchText)
                                         || b.BillStatus.ToString().Contains(searchText)
                                         || b.CustomerName.ToLower().Contains(searchText)
-                                        || b.EmployeeName.ToLower().Contains(searchText)).ToList();
+                                        || b.CustomerName.Contains(searchText)
+                                        || b.EmployeeName.ToLower().Contains(searchText)
+                                        || b.EmployeeName.Contains(searchText)).ToList();
                 BillContent.dataGridBill.Items.Clear();
                 foreach (var item in searchArray)
                 {

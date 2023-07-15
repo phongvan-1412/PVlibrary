@@ -1,0 +1,30 @@
+﻿<Window x:Class="pvlibrary.View.Update.EmployeeUpdate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:pvlibrary.View.Update"
+        mc:Ignorable="d" 
+        Title="Employee Update" Height="350" Width="700"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="700"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Left" Margin="50,50,0,0" TextWrapping="Wrap" Text="Update Employee" VerticalAlignment="Top" Width="300" FontSize="30" FontWeight="Bold" Height="50"/>
+        <TextBox x:Name="tbEmpName" HorizontalAlignment="Left" Margin="150,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="30" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="50,120,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="400,120,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Width="50" Height="30"/>
+        <TextBox x:Name="tbEmpEmail" HorizontalAlignment="Left" Margin="450,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="30"/>
+        <TextBlock HorizontalAlignment="Left" Margin="50,175,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="100" Height="30" FontSize="16" FontWeight="Bold"/>
+        <TextBox x:Name="tbEmpPwd" HorizontalAlignment="Left" Margin="150,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="30"/>
+        <Button x:Name="btnEmpUpdate" Content="Update" HorizontalAlignment="Left" Margin="50,230,0,0" VerticalAlignment="Top" Background="Black" Foreground="White" FontSize="16" FontWeight="Bold" Width="100" Height="30" Click="BtnEmpUpdateSubmit_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="400,175,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Width="50" Height="30"/>
+        <CheckBox x:Name="ckEmpStatus" HorizontalAlignment="Left" Margin="458,180,0,0" VerticalAlignment="Top" FontSize="16" Width="20" Height="20"/>
+
+    </Grid>
+</Window>

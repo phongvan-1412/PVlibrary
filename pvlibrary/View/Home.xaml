@@ -1,0 +1,127 @@
+﻿<Page x:Class="pvlibrary.View.Home"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:pvlibrary.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1500"
+      Title="Home">
+
+    <Grid x:Name="homeLayout">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1500"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="800"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FFA29E9E" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        
+        <Grid x:Name="menuLayout" Width="160" Background="#e8f6f9" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Dashboard-->
+            <Border
+                    Margin="30,100,30,670"
+                    BorderBrush="#e8f6f9"
+                    BorderThickness="0.3"
+                    CornerRadius="5"
+                    Panel.ZIndex="-1"
+                    Width="100" Height="30">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20"/>
+                </Border.Effect>
+            </Border>
+            <Button x:Name="btnDashboard" Content="Dashboard" Click="BtnDashboard_Click"
+                    HorizontalAlignment="Center" VerticalAlignment="Top" 
+                    Width="100" Height="30" Margin="0,100,0,0"
+                    Background="#b2d6d1" FontSize="16" FontWeight="Bold" Foreground="White" BorderBrush="Transparent"/>
+            
+            <!--Cashier-->
+            <Border
+                    Margin="30,160,30,610"
+                    BorderBrush="#2f8f9d"
+                    BorderThickness="0.3"
+                    CornerRadius="5"
+                    Panel.ZIndex="-1"
+                    Width="100" Height="30">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20"/>
+                </Border.Effect>
+            </Border>
+            <Button x:Name="btnCashier" Content="Cashier" Click="BtnCashier_Click"
+                    HorizontalAlignment="Center" VerticalAlignment="Top" 
+                    Width="100" Height="30" Margin="0,160,0,0" 
+                    Background="#7fbbb3" FontSize="16" FontWeight="Bold" Foreground="White" BorderBrush="Transparent"/>
+            
+            <!--Inventory-->
+            <Border
+                    Margin="30,220,30,550"
+                    BorderBrush="#2f8f9d"
+                    BorderThickness="0.3"
+                    CornerRadius="5"
+                    Panel.ZIndex="-1"
+                    Width="100" Height="30">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20"/>
+                </Border.Effect>
+            </Border>
+            <Button x:Name="btnInventory" Content="Inventory" Click="BtnInventory_Click"
+                    HorizontalAlignment="Center" VerticalAlignment="Top" 
+                    Width="100" Height="30" Margin="0,220,0,0" 
+                    Background="#65958f" FontSize="16" FontWeight="Bold" Foreground="White" BorderBrush="Transparent"/>
+            
+            <!--Data-->
+            <Border
+                    Margin="30,280,30,490"
+                    BorderBrush="#2f8f9d"
+                    BorderThickness="0.3"
+                    CornerRadius="5"
+                    Panel.ZIndex="-1"
+                    Width="100" Height="30">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20"/>
+                </Border.Effect>
+            </Border>
+            <Button x:Name="btnInsertData" Content="Data" Click="BtnInsertData_Click"
+                    HorizontalAlignment="Center" VerticalAlignment="Top" 
+                    Width="100" Height="30" Margin="0,280,0,0"
+                    Background="#346c66" FontSize="16" FontWeight="Bold" Foreground="White" BorderBrush="Transparent"/>
+            
+            <!--Log out-->
+            <Border
+                    Margin="30,100,30,670"
+                    BorderBrush="#e8f6f9"
+                    BorderThickness="0.3"
+                    CornerRadius="5"
+                    Panel.ZIndex="-1"
+                    Width="100" Height="30">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20"/>
+                </Border.Effect>
+            </Border>
+            <Button x:Name="btnLogout" Content="Log Out" 
+                    HorizontalAlignment="Center" Margin="0,700,0,0" VerticalAlignment="Top" Width="100" Height="30" 
+                    Background="#07373b" FontSize="16" FontWeight="Bold" Foreground="White" BorderBrush="Transparent"
+                    Click="BtnLogOut_Click"/>
+        </Grid>
+        
+        <Grid x:Name="contentLayout" Margin="160,0,0,0" Background="White" HorizontalAlignment="Left" Width="1340">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="800"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1340"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+    </Grid>
+</Page>

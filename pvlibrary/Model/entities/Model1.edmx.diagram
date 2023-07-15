@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="80ccd48721d64d89938d81c7468b6dfc" Name="Diagram1">
+        <EntityTypeShape EntityType="PVLibraryModel.Author" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="PVLibraryModel.Bill" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PVLibraryModel.BillDetail" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PVLibraryModel.BillStatu" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PVLibraryModel.Book" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PVLibraryModel.Category" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PVLibraryModel.Customer" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PVLibraryModel.Employee" Width="1.5" PointX="0.75" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PVLibraryModel.Publisher" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="PVLibraryModel.FK__Book__auth_id__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="PVLibraryModel.FK__Bill__bill_statu__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="PVLibraryModel.FK__Bill__cus_id__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="PVLibraryModel.FK__Bill__emp_id__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="PVLibraryModel.FK__BillDetai__bill___6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="PVLibraryModel.FK__BillDetai__book___6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="PVLibraryModel.FK__Book__cate_id__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="PVLibraryModel.FK__Book__pub_id__5812160E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,625 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PVLibraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="auth_id" />
+          </Key>
+          <Property Name="auth_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="auth_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="auth_information" Type="nvarchar" MaxLength="500" />
+          <Property Name="auth_status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="bill_id" />
+          </Key>
+          <Property Name="bill_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="created_time" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="bill_total" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cus_id" Type="int" />
+          <Property Name="emp_id" Type="int" />
+          <Property Name="bill_status" Type="int" />
+        </EntityType>
+        <EntityType Name="BillDetail">
+          <Key>
+            <PropertyRef Name="bid_id" />
+            <PropertyRef Name="book_id" />
+            <PropertyRef Name="bill_id" />
+          </Key>
+          <Property Name="bid_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="book_id" Type="int" Nullable="false" />
+          <Property Name="bid_amount" Type="int" Nullable="false" />
+          <Property Name="bid_payment" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="bill_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BillStatus">
+          <Key>
+            <PropertyRef Name="bs_id" />
+          </Key>
+          <Property Name="bs_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bs_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="bs_status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="book_id" />
+          </Key>
+          <Property Name="book_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="book_name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="book_amount" Type="int" Nullable="false" />
+          <Property Name="book_price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="book_sale_price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="book_cover" Type="varchar" MaxLength="4000" />
+          <Property Name="book_description" Type="nvarchar" MaxLength="500" />
+          <Property Name="auth_id" Type="int" />
+          <Property Name="pub_id" Type="int" />
+          <Property Name="cate_id" Type="int" />
+          <Property Name="book_status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="cate_id" />
+          </Key>
+          <Property Name="cate_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cate_name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="cate_status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="cus_id" />
+          </Key>
+          <Property Name="cus_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cus_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="cus_address" Type="nvarchar" MaxLength="500" />
+          <Property Name="cus_contact" Type="varchar" MaxLength="15" />
+          <Property Name="cus_email" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="cus_status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="emp_email" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="emp_password" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="emp_status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="pub_id" />
+          </Key>
+          <Property Name="pub_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pub_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="pub_information" Type="nvarchar" MaxLength="500" />
+          <Property Name="pub_status" Type="bit" />
+        </EntityType>
+        <Association Name="FK__Bill__bill_statu__6477ECF3">
+          <End Role="BillStatus" Type="Self.BillStatus" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillStatus">
+              <PropertyRef Name="bs_id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="bill_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bill__cus_id__628FA481">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="cus_id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="cus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bill__emp_id__6383C8BA">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BillDetai__bill___6A30C649">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="1" />
+          <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="bill_id" />
+            </Principal>
+            <Dependent Role="BillDetail">
+              <PropertyRef Name="bill_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BillDetai__book___6754599E">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="book_id" />
+            </Principal>
+            <Dependent Role="BillDetail">
+              <PropertyRef Name="book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Book__auth_id__571DF1D5">
+          <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="auth_id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="auth_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Book__cate_id__59063A47">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="cate_id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="cate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Book__pub_id__5812160E">
+          <End Role="Publisher" Type="Self.Publisher" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publisher">
+              <PropertyRef Name="pub_id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="pub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PVLibraryModelStoreContainer">
+          <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BillDetail" EntityType="Self.BillDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BillStatus" EntityType="Self.BillStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Bill__bill_statu__6477ECF3" Association="Self.FK__Bill__bill_statu__6477ECF3">
+            <End Role="BillStatus" EntitySet="BillStatus" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bill__cus_id__628FA481" Association="Self.FK__Bill__cus_id__628FA481">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bill__emp_id__6383C8BA" Association="Self.FK__Bill__emp_id__6383C8BA">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BillDetai__bill___6A30C649" Association="Self.FK__BillDetai__bill___6A30C649">
+            <End Role="Bill" EntitySet="Bill" />
+            <End Role="BillDetail" EntitySet="BillDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BillDetai__book___6754599E" Association="Self.FK__BillDetai__book___6754599E">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="BillDetail" EntitySet="BillDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Book__auth_id__571DF1D5" Association="Self.FK__Book__auth_id__571DF1D5">
+            <End Role="Author" EntitySet="Author" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Book__cate_id__59063A47" Association="Self.FK__Book__cate_id__59063A47">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Book__pub_id__5812160E" Association="Self.FK__Book__pub_id__5812160E">
+            <End Role="Publisher" EntitySet="Publisher" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PVLibraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="auth_id" />
+          </Key>
+          <Property Name="auth_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="auth_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="auth_information" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="auth_status" Type="Boolean" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Book__auth_id__571DF1D5" FromRole="Author" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="bill_id" />
+          </Key>
+          <Property Name="bill_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created_time" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bill_total" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cus_id" Type="Int32" />
+          <Property Name="emp_id" Type="Int32" />
+          <Property Name="bill_status" Type="Int32" />
+          <NavigationProperty Name="BillStatu" Relationship="Self.FK__Bill__bill_statu__6477ECF3" FromRole="Bill" ToRole="BillStatus" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Bill__cus_id__628FA481" FromRole="Bill" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Bill__emp_id__6383C8BA" FromRole="Bill" ToRole="Employee" />
+          <NavigationProperty Name="BillDetails" Relationship="Self.FK__BillDetai__bill___6A30C649" FromRole="Bill" ToRole="BillDetail" />
+        </EntityType>
+        <EntityType Name="BillDetail">
+          <Key>
+            <PropertyRef Name="bid_id" />
+            <PropertyRef Name="book_id" />
+            <PropertyRef Name="bill_id" />
+          </Key>
+          <Property Name="bid_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="book_id" Type="Int32" Nullable="false" />
+          <Property Name="bid_amount" Type="Int32" Nullable="false" />
+          <Property Name="bid_payment" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="bill_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK__BillDetai__bill___6A30C649" FromRole="BillDetail" ToRole="Bill" />
+          <NavigationProperty Name="Book" Relationship="Self.FK__BillDetai__book___6754599E" FromRole="BillDetail" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="BillStatu">
+          <Key>
+            <PropertyRef Name="bs_id" />
+          </Key>
+          <Property Name="bs_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bs_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bs_status" Type="Boolean" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK__Bill__bill_statu__6477ECF3" FromRole="BillStatus" ToRole="Bill" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="book_id" />
+          </Key>
+          <Property Name="book_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="book_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="book_amount" Type="Int32" Nullable="false" />
+          <Property Name="book_price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="book_sale_price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="book_cover" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="book_description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="auth_id" Type="Int32" />
+          <Property Name="pub_id" Type="Int32" />
+          <Property Name="cate_id" Type="Int32" />
+          <Property Name="book_status" Type="Boolean" />
+          <NavigationProperty Name="Author" Relationship="Self.FK__Book__auth_id__571DF1D5" FromRole="Book" ToRole="Author" />
+          <NavigationProperty Name="BillDetails" Relationship="Self.FK__BillDetai__book___6754599E" FromRole="Book" ToRole="BillDetail" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Book__cate_id__59063A47" FromRole="Book" ToRole="Category" />
+          <NavigationProperty Name="Publisher" Relationship="Self.FK__Book__pub_id__5812160E" FromRole="Book" ToRole="Publisher" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="cate_id" />
+          </Key>
+          <Property Name="cate_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cate_name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cate_status" Type="Boolean" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Book__cate_id__59063A47" FromRole="Category" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="cus_id" />
+          </Key>
+          <Property Name="cus_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cus_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="cus_address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="cus_contact" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="cus_email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cus_status" Type="Boolean" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK__Bill__cus_id__628FA481" FromRole="Customer" ToRole="Bill" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="emp_email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emp_password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emp_status" Type="Boolean" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK__Bill__emp_id__6383C8BA" FromRole="Employee" ToRole="Bill" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="pub_id" />
+          </Key>
+          <Property Name="pub_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pub_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pub_information" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="pub_status" Type="Boolean" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Book__pub_id__5812160E" FromRole="Publisher" ToRole="Book" />
+        </EntityType>
+        <Association Name="FK__Book__auth_id__571DF1D5">
+          <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="auth_id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="auth_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bill__bill_statu__6477ECF3">
+          <End Role="BillStatus" Type="Self.BillStatu" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillStatus">
+              <PropertyRef Name="bs_id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="bill_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bill__cus_id__628FA481">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="cus_id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="cus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bill__emp_id__6383C8BA">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BillDetai__bill___6A30C649">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="1" />
+          <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="bill_id" />
+            </Principal>
+            <Dependent Role="BillDetail">
+              <PropertyRef Name="bill_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BillDetai__book___6754599E">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="book_id" />
+            </Principal>
+            <Dependent Role="BillDetail">
+              <PropertyRef Name="book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Book__cate_id__59063A47">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="cate_id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="cate_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Book__pub_id__5812160E">
+          <End Role="Publisher" Type="Self.Publisher" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publisher">
+              <PropertyRef Name="pub_id" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="pub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PVLibraryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Authors" EntityType="Self.Author" />
+          <EntitySet Name="Bills" EntityType="Self.Bill" />
+          <EntitySet Name="BillDetails" EntityType="Self.BillDetail" />
+          <EntitySet Name="BillStatus" EntityType="Self.BillStatu" />
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Publishers" EntityType="Self.Publisher" />
+          <AssociationSet Name="FK__Book__auth_id__571DF1D5" Association="Self.FK__Book__auth_id__571DF1D5">
+            <End Role="Author" EntitySet="Authors" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bill__bill_statu__6477ECF3" Association="Self.FK__Bill__bill_statu__6477ECF3">
+            <End Role="BillStatus" EntitySet="BillStatus" />
+            <End Role="Bill" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bill__cus_id__628FA481" Association="Self.FK__Bill__cus_id__628FA481">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Bill" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bill__emp_id__6383C8BA" Association="Self.FK__Bill__emp_id__6383C8BA">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Bill" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BillDetai__bill___6A30C649" Association="Self.FK__BillDetai__bill___6A30C649">
+            <End Role="Bill" EntitySet="Bills" />
+            <End Role="BillDetail" EntitySet="BillDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BillDetai__book___6754599E" Association="Self.FK__BillDetai__book___6754599E">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="BillDetail" EntitySet="BillDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Book__cate_id__59063A47" Association="Self.FK__Book__cate_id__59063A47">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Book__pub_id__5812160E" Association="Self.FK__Book__pub_id__5812160E">
+            <End Role="Publisher" EntitySet="Publishers" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PVLibraryModelStoreContainer" CdmEntityContainer="PVLibraryEntities">
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="PVLibraryModel.Author">
+              <MappingFragment StoreEntitySet="Author">
+                <ScalarProperty Name="auth_id" ColumnName="auth_id" />
+                <ScalarProperty Name="auth_name" ColumnName="auth_name" />
+                <ScalarProperty Name="auth_information" ColumnName="auth_information" />
+                <ScalarProperty Name="auth_status" ColumnName="auth_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bills">
+            <EntityTypeMapping TypeName="PVLibraryModel.Bill">
+              <MappingFragment StoreEntitySet="Bill">
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="bill_total" ColumnName="bill_total" />
+                <ScalarProperty Name="cus_id" ColumnName="cus_id" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="bill_status" ColumnName="bill_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillDetails">
+            <EntityTypeMapping TypeName="PVLibraryModel.BillDetail">
+              <MappingFragment StoreEntitySet="BillDetail">
+                <ScalarProperty Name="bid_id" ColumnName="bid_id" />
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
+                <ScalarProperty Name="bid_amount" ColumnName="bid_amount" />
+                <ScalarProperty Name="bid_payment" ColumnName="bid_payment" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillStatus">
+            <EntityTypeMapping TypeName="PVLibraryModel.BillStatu">
+              <MappingFragment StoreEntitySet="BillStatus">
+                <ScalarProperty Name="bs_id" ColumnName="bs_id" />
+                <ScalarProperty Name="bs_name" ColumnName="bs_name" />
+                <ScalarProperty Name="bs_status" ColumnName="bs_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="PVLibraryModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="book_id" ColumnName="book_id" />
+                <ScalarProperty Name="book_name" ColumnName="book_name" />
+                <ScalarProperty Name="book_amount" ColumnName="book_amount" />
+                <ScalarProperty Name="book_price" ColumnName="book_price" />
+                <ScalarProperty Name="book_sale_price" ColumnName="book_sale_price" />
+                <ScalarProperty Name="book_cover" ColumnName="book_cover" />
+                <ScalarProperty Name="book_description" ColumnName="book_description" />
+                <ScalarProperty Name="auth_id" ColumnName="auth_id" />
+                <ScalarProperty Name="pub_id" ColumnName="pub_id" />
+                <ScalarProperty Name="cate_id" ColumnName="cate_id" />
+                <ScalarProperty Name="book_status" ColumnName="book_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="PVLibraryModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="cate_id" ColumnName="cate_id" />
+                <ScalarProperty Name="cate_name" ColumnName="cate_name" />
+                <ScalarProperty Name="cate_status" ColumnName="cate_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PVLibraryModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="cus_id" ColumnName="cus_id" />
+                <ScalarProperty Name="cus_name" ColumnName="cus_name" />
+                <ScalarProperty Name="cus_address" ColumnName="cus_address" />
+                <ScalarProperty Name="cus_contact" ColumnName="cus_contact" />
+                <ScalarProperty Name="cus_email" ColumnName="cus_email" />
+                <ScalarProperty Name="cus_status" ColumnName="cus_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="PVLibraryModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+                <ScalarProperty Name="emp_email" ColumnName="emp_email" />
+                <ScalarProperty Name="emp_password" ColumnName="emp_password" />
+                <ScalarProperty Name="emp_status" ColumnName="emp_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publishers">
+            <EntityTypeMapping TypeName="PVLibraryModel.Publisher">
+              <MappingFragment StoreEntitySet="Publisher">
+                <ScalarProperty Name="pub_id" ColumnName="pub_id" />
+                <ScalarProperty Name="pub_name" ColumnName="pub_name" />
+                <ScalarProperty Name="pub_information" ColumnName="pub_information" />
+                <ScalarProperty Name="pub_status" ColumnName="pub_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

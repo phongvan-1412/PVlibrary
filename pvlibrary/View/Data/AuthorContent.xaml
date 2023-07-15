@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="pvlibrary.View.Data.AuthorContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:pvlibrary.View.Data"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1340">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="800"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1340"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Left" Margin="50,50,0,0" TextWrapping="Wrap" Text="Add New Author" VerticalAlignment="Top" Width="250" FontSize="30" FontWeight="Bold" Height="50"/>
+        <TextBox x:Name="tbAuthorName" HorizontalAlignment="Left" Margin="150,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="30" FontSize="16"/>
+        <RichTextBox x:Name="rtbAuthorInfo" Margin="150,165,490,525">
+            <FlowDocument>
+                <Paragraph>
+                    <Run/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <TextBlock HorizontalAlignment="Left" Margin="50,111,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Width="70"/>
+        <TextBlock HorizontalAlignment="Left" Margin="50,165,0,0" TextWrapping="Wrap" Text="Information" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Width="100" Height="30"/>
+        <Button x:Name="btnAuthorSubmit" Content="Submit" Cursor="Hand" HorizontalAlignment="Left" Margin="150,300,0,0" VerticalAlignment="Top" Background="Black" Foreground="White" FontSize="16" FontWeight="Bold" Width="100" Height="30" Click="BtnAuthSubmit_Click"/>
+        <!--get all columns in db-->
+        <!--<DataGrid Name="dgAuthList" ItemsSource="{Binding authorList}" Margin="50,380,50,0"/>-->
+
+        <!--get specific column-->
+        <DataGrid Name="dgAuthList" Margin="50,415,50,50">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="" Binding="{Binding auth_id}"  Width="10"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding auth_name}" Width="150"/>
+                <DataGridTemplateColumn  Header="Information" Width="900">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding auth_information}"  Width="900"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Status" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="ckAuthStatus" IsChecked="{Binding auth_status}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Action" Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnAuthUpdate" Content="Update" Click="BtnAuthUpdate_Click"
+                                        Width="50" Height="30" Cursor="Hand"
+                                        BorderBrush="Transparent" Background="Black" Foreground="White"
+                                        FontSize="12" FontWeight="Bold"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock HorizontalAlignment="Left" Margin="50,360,0,0" TextWrapping="Wrap" Text="All Authors" VerticalAlignment="Top" FontSize="30" Width="200" FontWeight="Bold"/>
+        <TextBox x:Name="tbSearchText" KeyDown="TBSearchText_KeyDown"
+                 HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap"
+                 Width="300" Height="30" Margin="250,370,0,0" 
+                 FontSize="16"/>
+
+        <Border
+                Margin="1300,0,0,780"
+                BorderBrush="#ea0001"
+                BorderThickness="0.5"
+                CornerRadius="3"
+                Panel.ZIndex="-1"
+                Width="20" Height="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20"/>
+            </Border.Effect>
+        </Border>
+        <Button Content="X" Click="BtnClose_Click"
+                Width="20" Height="20" Margin="1300,0,0,780" Padding="1 -2 0 0"
+                Background="#ea0001" BorderBrush="Transparent"
+                Foreground="White" FontSize="15" FontWeight="Bold" RenderTransformOrigin="1.377,0.005"/>
+    </Grid>
+</UserControl>
